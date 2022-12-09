@@ -3,6 +3,7 @@ const autoprefixer = require("autoprefixer"),
   gulp = require("gulp"),
   inky = require("inky"),
   inlineCss = require("gulp-inline-css"),
+  nunjucksRender = require("gulp-nunjucks-render"),
   sass = require("gulp-sass")(require("sass")),
   postcss = require("gulp-postcss"),
   rename = require("gulp-rename"),
@@ -41,9 +42,25 @@ gulp.task("scss", function() {
     );
 });
 
-gulp.task("html", function() {
+gulp.task("nunjucks", function() {
   return gulp
-    .src("src/templates/**/*.html")
+    .src("src/emails/**/*.+(html|nunjucks|njk)")
+    .pipe(
+      nunjucksRender({
+        path: ["src/templates"]
+      })
+    )
+    .pipe(gulp.dest("./src/inky"))
+    .pipe(
+      browserSync.reload({
+        stream: true
+      })
+    );
+});
+
+gulp.task("emails", function() {
+  return gulp
+    .src("src/inky/**/*.html")
     .pipe(replace(new RegExp("/sass/(.+).scss", "ig"), "/css/$1.css"))
     .pipe(inky())
     .pipe(inlineCss({ applyTableAttributes: true }))
@@ -53,7 +70,11 @@ gulp.task("html", function() {
 
 gulp.task("watch", function() {
   gulp.watch("./src/scss/**/*.scss", gulp.series("scss"));
-  gulp.watch("./src/templates/**/*.html", gulp.series("html"));
+  gulp.watch("./src/inky/**/*.html", gulp.series("emails"));
+  gulp.watch(
+    "./src/templates/**/*.+(html|nunjucks|njk)",
+    gulp.series("nunjucks")
+  );
 });
 
 gulp.task("default", gulp.parallel("watch", "browserSync"));

@@ -14,7 +14,6 @@ glup
 
 ## Todo
 
-- Inline CSS
-- Nunkucks
-- Document, header, footer templates
+- Webfonts
 - Pretty up HTML
+- Send files to litmus
