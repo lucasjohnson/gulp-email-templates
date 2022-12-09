@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/lucasjohnson/gulp-email-templates/issues"
   },
-  "homepage": "https://github.com/lucasjohnson/gulp-email-templates#readme"
+  "homepage": "https://github.com/lucasjohnson/gulp-email-templates#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
 }
