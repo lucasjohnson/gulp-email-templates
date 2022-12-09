@@ -8,7 +8,6 @@ const autoprefixer = require("autoprefixer"),
   postcss = require("gulp-postcss"),
   prettify = require("gulp-html-prettify"),
   removeEmptyLines = require("gulp-remove-empty-lines"),
-  rename = require("gulp-rename"),
   replace = require("gulp-replace");
 
 const baseDir = "./dist";
@@ -68,7 +67,6 @@ gulp.task("emails", function() {
     .pipe(inlineCss({ applyTableAttributes: true }))
     .pipe(prettify({ indent_char: " ", indent_size: 2 }))
     .pipe(removeEmptyLines())
-    .pipe(rename({ dirname: "" }))
     .pipe(gulp.dest("dist"))
     .pipe(
       browserSync.reload({
