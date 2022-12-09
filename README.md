@@ -1,1 +1,1 @@
-# gulp-email-templates
+# Gulp Email Templates
