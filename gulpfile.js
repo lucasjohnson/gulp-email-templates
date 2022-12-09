@@ -1,18 +1,44 @@
-const browserSync = require("browser-sync").create();
-const gulp = require("gulp");
-const inky = require("inky");
-const inlineCss = require("gulp-inline-css");
-const sass = require("gulp-sass")(require("sass"));
-const rename = require("gulp-rename");
-const replace = require("gulp-replace");
+const autoprefixer = require("autoprefixer"),
+  browserSync = require("browser-sync").create(),
+  gulp = require("gulp"),
+  inky = require("inky"),
+  inlineCss = require("gulp-inline-css"),
+  sass = require("gulp-sass")(require("sass")),
+  postcss = require("gulp-postcss"),
+  rename = require("gulp-rename"),
+  replace = require("gulp-replace");
 
 const baseDir = "./dist";
+
+gulp.task("browserSync", function() {
+  browserSync.init({
+    browser: ["google chrome"],
+    server: {
+      baseDir: baseDir
+    }
+  });
+});
+
+const postcssOptions = [autoprefixer()];
 
 gulp.task("scss", function() {
   return gulp
     .src("./src/scss/**/*.scss")
+    .pipe(
+      sass({
+        outputStyle: "expanded",
+        precision: 3,
+        errLogToConsole: true
+      })
+    )
     .pipe(sass().on("error", sass.logError))
-    .pipe(gulp.dest("./src/css"));
+    .pipe(postcss(postcssOptions))
+    .pipe(gulp.dest("./src/css"))
+    .pipe(
+      browserSync.reload({
+        stream: true
+      })
+    );
 });
 
 gulp.task("html", function() {
@@ -23,16 +49,6 @@ gulp.task("html", function() {
     .pipe(inlineCss())
     .pipe(rename({ dirname: "" }))
     .pipe(gulp.dest("dist"));
-});
-
-gulp.task("browserSync", function() {
-  return browserSync.init({
-    server: { baseDir: baseDir }
-  });
-});
-
-gulp.task("reloadBrowserSync", function() {
-  return browserSync.reload();
 });
 
 gulp.task("watch", function() {

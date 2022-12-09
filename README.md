@@ -14,7 +14,7 @@ glup
 
 ## Todo
 
-- Autoprefixer
+- Inline CSS
 - Nunkucks
 - Document, header, footer templates
 - Pretty up HTML
