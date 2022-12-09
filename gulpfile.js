@@ -1,5 +1,9 @@
-function defaultTask(cb) {
-  cb();
-}
+var gulp = require("gulp");
+var inky = require("inky");
 
-exports.default = defaultTask;
+gulp.task("parse", function() {
+  return gulp
+    .src("src/templates/**/*.html")
+    .pipe(inky())
+    .pipe(gulp.dest("dist"));
+});
