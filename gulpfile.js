@@ -3,6 +3,7 @@ const autoprefixer = require("autoprefixer"),
   gulp = require("gulp"),
   inky = require("inky"),
   inlineCss = require("gulp-inline-css"),
+  litmus = require("gulp-litmus"),
   nunjucksRender = require("gulp-nunjucks-render"),
   sass = require("gulp-sass")(require("sass")),
   postcss = require("gulp-postcss"),
@@ -73,6 +74,24 @@ gulp.task("emails", function() {
         stream: true
       })
     );
+});
+
+gulp.task("litmus", function() {
+  return gulp.src("dist/**/*.html").pipe(
+    litmus({
+      username: "litmus_username",
+      password: "litmus_password",
+      url: "https://yourcompany.litmus.com",
+      // https://yourcompany.litmus.com/clients.xml
+      applications: [
+        "applemail6",
+        "gmailnew",
+        "ffgmailnew",
+        "chromegmailnew",
+        "iphone4s"
+      ]
+    })
+  );
 });
 
 gulp.task("watch", function() {

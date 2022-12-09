@@ -23,6 +23,7 @@
     "gulp": "^4.0.2",
     "gulp-html-prettify": "^0.0.1",
     "gulp-inline-css": "^4.0.0",
+    "gulp-litmus": "^0.0.7",
     "gulp-nunjucks-render": "^2.2.3",
     "gulp-postcss": "^9.0.1",
     "gulp-remove-empty-lines": "^0.1.0",
@@ -34,6 +35,6 @@
   "browserslist": [
     "last 2 version",
     "> 2%",
-    "ie > 10"
+    "ie > 9"
   ]
 }
