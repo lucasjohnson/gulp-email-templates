@@ -15,5 +15,4 @@ glup
 ## Todo
 
 - Webfonts
-- Pretty up HTML
 - Send files to litmus

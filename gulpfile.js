@@ -6,6 +6,8 @@ const autoprefixer = require("autoprefixer"),
   nunjucksRender = require("gulp-nunjucks-render"),
   sass = require("gulp-sass")(require("sass")),
   postcss = require("gulp-postcss"),
+  prettify = require("gulp-html-prettify"),
+  removeEmptyLines = require("gulp-remove-empty-lines"),
   rename = require("gulp-rename"),
   replace = require("gulp-replace");
 
@@ -64,6 +66,8 @@ gulp.task("emails", function() {
     .pipe(replace(new RegExp("/sass/(.+).scss", "ig"), "/css/$1.css"))
     .pipe(inky())
     .pipe(inlineCss({ applyTableAttributes: true }))
+    .pipe(prettify({ indent_char: " ", indent_size: 2 }))
+    .pipe(removeEmptyLines())
     .pipe(rename({ dirname: "" }))
     .pipe(gulp.dest("dist"))
     .pipe(
