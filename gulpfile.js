@@ -46,7 +46,7 @@ gulp.task("html", function() {
     .src("src/templates/**/*.html")
     .pipe(replace(new RegExp("/sass/(.+).scss", "ig"), "/css/$1.css"))
     .pipe(inky())
-    .pipe(inlineCss())
+    .pipe(inlineCss({ applyTableAttributes: true }))
     .pipe(rename({ dirname: "" }))
     .pipe(gulp.dest("dist"));
 });
