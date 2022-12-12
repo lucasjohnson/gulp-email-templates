@@ -1,6 +1,7 @@
 const autoprefixer = require("autoprefixer"),
   browserSync = require("browser-sync").create(),
   gulp = require("gulp"),
+  inject = require("gulp-inject"),
   inky = require("inky"),
   inlineCss = require("gulp-inline-css"),
   litmus = require("gulp-litmus"),
@@ -68,7 +69,7 @@ gulp.task("emails", function() {
     .pipe(inlineCss({ applyTableAttributes: true }))
     .pipe(prettify({ indent_char: " ", indent_size: 2 }))
     .pipe(removeEmptyLines())
-    .pipe(gulp.dest("dist"))
+    .pipe(gulp.dest(baseDir))
     .pipe(
       browserSync.reload({
         stream: true
@@ -94,11 +95,38 @@ gulp.task("litmus", function() {
   );
 });
 
+gulp.task("index", function() {
+  return gulp
+    .src("./index.html")
+    .pipe(
+      inject(gulp.src(["dist/*.html"], { read: false }), {
+        transform: function(filepath) {
+          if (filepath.slice(-5) === ".html") {
+            const renameFilePath = filepath.replace("/dist/", "");
+            const fileName = renameFilePath.replace(".html", "");
+
+            return (
+              '<li><a href="' +
+              renameFilePath +
+              '">' +
+              fileName[0].toUpperCase() +
+              fileName.substring(1) +
+              "</a></li>"
+            );
+          }
+
+          return inject.transform.apply(inject.transform, arguments);
+        }
+      })
+    )
+    .pipe(gulp.dest(baseDir));
+});
+
 gulp.task("watch", function() {
   gulp.watch("./src/scss/**/*.scss", gulp.series("scss", "emails"));
   gulp.watch("./src/inky-templates/**/*.html", gulp.series("emails"));
   gulp.watch("./src/**/*.njk", gulp.series("partials"));
 });
 
-gulp.task("build", gulp.series("scss", "partials", "emails"));
+gulp.task("build", gulp.series("scss", "partials", "emails", "index"));
 gulp.task("default", gulp.parallel("build", "watch", "browserSync"));

@@ -26,6 +26,6 @@ glup
 
 ## Todo
 
-- Gernerate links to emails
+- Remove build directories
 - Compress outputted HTML and comment on how it was generated
-- Send files to litmus
+- [] Send files to litmus
