@@ -2,6 +2,7 @@ const autoprefixer = require("autoprefixer"),
   browserSync = require("browser-sync").create(),
   clean = require("gulp-clean"),
   gulp = require("gulp"),
+  htmlmin = require("gulp-htmlmin"),
   inject = require("gulp-inject"),
   inky = require("inky"),
   inlineCss = require("gulp-inline-css"),
@@ -9,8 +10,6 @@ const autoprefixer = require("autoprefixer"),
   partialsRender = require("gulp-nunjucks-render"),
   sass = require("gulp-sass")(require("sass")),
   postcss = require("gulp-postcss"),
-  prettify = require("gulp-html-prettify"),
-  removeEmptyLines = require("gulp-remove-empty-lines"),
   replace = require("gulp-replace");
 
 const baseDir = "./dist";
@@ -74,8 +73,15 @@ gulp.task("emails", function() {
     .pipe(replace(new RegExp("/sass/(.+).scss", "ig"), "/css/$1.css"))
     .pipe(inky())
     .pipe(inlineCss({ applyTableAttributes: true }))
-    .pipe(prettify({ indent_char: " ", indent_size: 2 }))
-    .pipe(removeEmptyLines())
+    .pipe(
+      htmlmin({
+        collapseWhitespace: true,
+        ignoreCustomComments: true,
+        keepClosingSlash: true,
+        collapseWhitespace: true,
+        preserveLineBreaks: true
+      })
+    )
     .pipe(gulp.dest(baseDir))
     .pipe(
       browserSync.reload({
