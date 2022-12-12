@@ -26,4 +26,6 @@ glup
 
 ## Todo
 
+- Gernerate links to emails
+- Compress outputted HTML and comment on how it was generated
 - Send files to litmus
