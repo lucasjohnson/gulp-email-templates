@@ -4,7 +4,7 @@ const autoprefixer = require("autoprefixer"),
   inky = require("inky"),
   inlineCss = require("gulp-inline-css"),
   litmus = require("gulp-litmus"),
-  nunjucksRender = require("gulp-nunjucks-render"),
+  partialsRender = require("gulp-nunjucks-render"),
   sass = require("gulp-sass")(require("sass")),
   postcss = require("gulp-postcss"),
   prettify = require("gulp-html-prettify"),
@@ -44,12 +44,12 @@ gulp.task("scss", function() {
     );
 });
 
-gulp.task("nunjucks", function() {
+gulp.task("partials", function() {
   return gulp
-    .src("src/emails/**/*.+(html|nunjucks|njk)")
+    .src("src/emails/**/*.njk")
     .pipe(
-      nunjucksRender({
-        path: ["src/layout"]
+      partialsRender({
+        path: ["src/partials"]
       })
     )
     .pipe(gulp.dest("./src/inky-templates"))
@@ -97,8 +97,8 @@ gulp.task("litmus", function() {
 gulp.task("watch", function() {
   gulp.watch("./src/scss/**/*.scss", gulp.series("scss", "emails"));
   gulp.watch("./src/inky-templates/**/*.html", gulp.series("emails"));
-  gulp.watch("./src/**/*.njk", gulp.series("nunjucks"));
+  gulp.watch("./src/**/*.njk", gulp.series("partials"));
 });
 
-gulp.task("build", gulp.series("scss", "nunjucks", "emails"));
+gulp.task("build", gulp.series("scss", "partials", "emails"));
 gulp.task("default", gulp.parallel("build", "watch", "browserSync"));
