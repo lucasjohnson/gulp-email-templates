@@ -1,5 +1,6 @@
 const autoprefixer = require("autoprefixer"),
   browserSync = require("browser-sync").create(),
+  clean = require("gulp-clean"),
   gulp = require("gulp"),
   inject = require("gulp-inject"),
   inky = require("inky"),
@@ -24,6 +25,12 @@ gulp.task("browserSync", function() {
 });
 
 const postcssOptions = [autoprefixer()];
+
+gulp.task("clean", function() {
+  return gulp
+    .src([baseDir, "./src/css", "./src/inky-templates"], { allowEmpty: true })
+    .pipe(clean());
+});
 
 gulp.task("scss", function() {
   return gulp
@@ -128,5 +135,5 @@ gulp.task("watch", function() {
   gulp.watch("./src/**/*.njk", gulp.series("partials"));
 });
 
-gulp.task("build", gulp.series("scss", "partials", "emails", "index"));
+gulp.task("build", gulp.series("clean", "scss", "partials", "emails", "index"));
 gulp.task("default", gulp.parallel("build", "watch", "browserSync"));

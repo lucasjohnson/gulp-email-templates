@@ -13,11 +13,13 @@ glup
 
 - [Autoprefixer](https://github.com/postcss/autoprefixer)
 - [Browser Sync](https://github.com/BrowserSync/browser-sync)
+- [Clean](https://github.com/peter-vilja/gulp-clean)
 - [Gulp](https://github.com/gulpjs/gulp)
 - [Html Prettify](https://github.com/colynb/gulp-html-prettify)
 - [Inky](https://github.com/foundation/inky)
 - [Inline CSS](https://github.com/jonkemp/gulp-inline-css)
 - [Litmus](https://github.com/jeremypeter/gulp-litmus)
+- [Inject](https://github.com/klei/gulp-inject)
 - [Nunjucks Render](https://github.com/carlosl/gulp-nunjucks-render)
 - [Postcss](https://github.com/postcss/gulp-postcss)
 - [Remove Empty Lines](https://github.com/danielhusar/gulp-remove-empty-lines)
