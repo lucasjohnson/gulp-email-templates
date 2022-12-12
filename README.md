@@ -9,25 +9,23 @@ npm intall
 glup
 ```
 
+## Commands
+
+- Bulid and serve project and watch for changes: `gulp`
+- Generate email template: `plop`
+
 ## Packages
 
-- [Autoprefixer](https://github.com/postcss/autoprefixer)
-- [Browser Sync](https://github.com/BrowserSync/browser-sync)
-- [Clean](https://github.com/peter-vilja/gulp-clean)
-- [Gulp](https://github.com/gulpjs/gulp)
-- [Html Prettify](https://github.com/colynb/gulp-html-prettify)
-- [Inky](https://github.com/foundation/inky)
-- [Inline CSS](https://github.com/jonkemp/gulp-inline-css)
-- [Litmus](https://github.com/jeremypeter/gulp-litmus)
-- [Inject](https://github.com/klei/gulp-inject)
-- [Nunjucks Render](https://github.com/carlosl/gulp-nunjucks-render)
-- [Postcss](https://github.com/postcss/gulp-postcss)
-- [Remove Empty Lines](https://github.com/danielhusar/gulp-remove-empty-lines)
-- [Replace](https://github.com/lazd/gulp-replace)
-- [SASS](https://github.com/dlmanning/gulp-sass)
-
-## Todo
-
-- Remove build directories
-- Compress outputted HTML and comment on how it was generated
-- [] Send files to litmus
+- [autoprefixer](https://github.com/postcss/autoprefixer)
+- [browser-sync](https://github.com/BrowserSync/browser-sync)
+- [gulp](https://github.com/gulpjs/gulp)
+- [gulp-clean](https://github.com/peter-vilja/gulp-clean)
+- [gulp-inject](https://github.com/klei/gulp-inject)
+- [gulp-inline-css](https://github.com/jonkemp/gulp-inline-css)
+- [gulp-litmus](https://github.com/jeremypeter/gulp-litmus)
+- [gulp-nunjucks-render](https://github.com/carlosl/gulp-nunjucks-render)
+- [gulp-postcss](https://github.com/postcss/gulp-postcss)
+- [gulp-replace](https://github.com/lazd/gulp-replace)
+- [gulp-sass](https://github.com/dlmanning/gulp-sass)
+- [htmlmin](https://github.com/jonschlinkert/gulp-htmlmin)
+- [inky](https://github.com/foundation/inky)

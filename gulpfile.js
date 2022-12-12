@@ -72,13 +72,12 @@ gulp.task("emails", function() {
     .src("src/inky-templates/**/*.html")
     .pipe(replace(new RegExp("/sass/(.+).scss", "ig"), "/css/$1.css"))
     .pipe(inky())
-    .pipe(inlineCss({ applyTableAttributes: true }))
+    .pipe(inlineCss({ applyTableAttributes: true, removeHtmlSelectors: true }))
     .pipe(
       htmlmin({
         collapseWhitespace: true,
         ignoreCustomComments: true,
         keepClosingSlash: true,
-        collapseWhitespace: true,
         preserveLineBreaks: true
       })
     )
